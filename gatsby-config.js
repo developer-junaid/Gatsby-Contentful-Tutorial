@@ -1,3 +1,10 @@
+const dotenv = require("dotenv") // Import
+
+// If in development
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config() // Initialize .env
+}
+//
 module.exports = {
   siteMetadata: {
     title: `Gatsby Starter Blog`,
@@ -126,5 +133,16 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
+    // // Adding Contentful Plugin
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        // Get from contentful API Key
+        spaceId: `5yi1by8whwma`,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+      },
+    },
+    // // rich text transformer plugin
+    `@contentful/gatsby-transformer-contentful-richtext`,
   ],
 }
